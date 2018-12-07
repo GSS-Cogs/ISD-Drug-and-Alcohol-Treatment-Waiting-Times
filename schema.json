@@ -1,0 +1,80 @@
+{
+  "@context": ["http://www.w3.org/ns/csvw", {"@language": "en"}],
+  "tables": [
+    {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/age-groups.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/isd-nhs-trusts.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
+    "url": "out/observations.csv",
+      "tableSchema": {
+        "columns": [{
+          "titles": "Period",
+          "name": "period",
+          "datatype": {
+            "format": "^government-year/[0-9]{4}-[0-9]{4}$"
+          },
+          "required": true
+        }, {
+          "titles": "Age",
+          "name": "age",
+          "required": true
+        }, {
+          "titles": "Sex",
+          "name": "sex",
+          "datatype": {
+            "format": "^T|M|F$"
+          },
+          "required": true
+        }, {
+          "titles": "Trust",
+          "name": "trust",
+          "required": true
+        }, {
+          "titles": "Measure Type",
+          "name": "measure_type",
+          "datatype": {
+            "format": "^Count|Percentage$"
+          },
+          "required": true
+        }, {
+          "titles": "Value",
+          "name": "value",
+          "datatype": "number",
+          "required": true
+        }, {
+          "titles": "Unit",
+          "name": "unit",
+          "required": true
+        }],
+        "foreignKeys": [{
+          "columnReference": "age",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/age-groups.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "unit",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_common/codelists/measurement-units.csv",
+            "columnReference": "notation"
+          }
+        }, {
+          "columnReference": "trust",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/isd-nhs-trusts.csv",
+            "columnReference": "notation"
+          }
+        }],
+        "primaryKey": [
+          "period", "age", "sex", "trust", "value", "unit"
+        ]
+      }
+    }
+  ]
+}

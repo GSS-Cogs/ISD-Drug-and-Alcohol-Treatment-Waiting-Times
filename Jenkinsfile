@@ -28,8 +28,9 @@ pipeline {
             }
             steps {
                 script {
-                    error "Needs review"
-                    sh "csvlint -s schema.json"
+                    ansiColor('xterm') {
+                        sh "csvlint -s schema.json"
+                    }
                 }
             }
         }
@@ -52,7 +53,10 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts 'out/*'
+            script {
+                archiveArtifacts 'out/*'
+                updateCard '5b4f3a25cf7b8e734d96cb6e'
+            }
         }
         success {
             build job: '../GDP-tests', wait: false
