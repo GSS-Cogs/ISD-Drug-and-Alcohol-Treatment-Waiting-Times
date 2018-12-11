@@ -11,6 +11,9 @@
       "url": "https://ons-opendata.github.io/ref_alcohol/codelists/isd-nhs-trusts.csv",
       "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
     }, {
+      "url": "https://ons-opendata.github.io/ref_alcohol/codelists/treatment-type.csv",
+      "tableSchema": "https://ons-opendata.github.io/ref_common/codelist-schema.json"
+    }, {
     "url": "out/observations.csv",
       "tableSchema": {
         "columns": [{
@@ -34,6 +37,10 @@
         }, {
           "titles": "Trust",
           "name": "trust",
+          "required": true
+        }, {
+          "titles": "Treatment Type",
+          "name": "treatment_type",
           "required": true
         }, {
           "titles": "Measure Type",
@@ -70,9 +77,15 @@
             "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/isd-nhs-trusts.csv",
             "columnReference": "notation"
           }
+        }, {
+          "columnReference": "treatment_type",
+          "reference": {
+            "resource": "https://ons-opendata.github.io/ref_alcohol/codelists/treatment-type.csv",
+            "columnReference": "label"
+          }
         }],
         "primaryKey": [
-          "period", "age", "sex", "trust", "value", "unit"
+          "period", "age", "sex", "trust", "treatment_type", "measure_type", "unit"
         ]
       }
     }
